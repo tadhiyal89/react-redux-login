@@ -7,8 +7,8 @@ class Login extends React.Component {
    constructor(props){
 	super(props);
 	this.state = {
-      username: '',
-      password:'',
+      username: 'Luke Skywalker',
+      password:'19BBY',
       data:[],
       searching:false
     };
@@ -68,11 +68,11 @@ class Login extends React.Component {
 									
 									<div className="form-group">
 										<label htmlFor="username" className="sr-only">Username</label>
-										<input type="username" name="username" id="username" className="form-control" placeholder="username" onChange={this.handleChange.bind(this,'username')}required/>
+										<input value ="Luke Skywalker"type="username" name="username" id="username" className="form-control" placeholder="username" onChange={this.handleChange.bind(this,'username')}required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="key" className="sr-only">Password</label>
-										<input type="password" name="key" id="key" className="form-control" placeholder="Password" onChange={this.handleChange.bind(this,'password')} required/>
+										<input value="19BBY"type="password" name="key" id="key" className="form-control" placeholder="Password" onChange={this.handleChange.bind(this,'password')} required/>
 									</div>
 									<button type="button" className={`btn btn-custom btn-lg btn-block `} onClick={this.submitForm.bind(this)}>Log In</button>
 								</form>

@@ -10,7 +10,7 @@ const reducer = (state = initial, action) => {
   switch (action.type) {
     case GET_ALL_SEARCH:
     debugger
-      return Object.assign({}, state, {searchResults: action.tasks});
+      return Object.assign({}, state, {'searchResults': action.tasks});
     default:
       return state;
   }

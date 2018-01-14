@@ -12,12 +12,15 @@ const css = require('./search.css');
 import {Link} from 'react-router-dom'
 import {loadState,saveState} from '../../utils/localStorage.js'
 import { withRouter} from 'react-router-dom';
-
 import {connect} from 'react-redux';
+
+import { bindActionCreators } from 'redux';
+
+
 import { getAllTasks }  from '../../actions/action'
 class Search extends React.Component {
-  constructor(){
-	super();
+  constructor(props){
+	super(props);
 	this.state = {
       value: '',
       data:[],
@@ -67,7 +70,8 @@ class Search extends React.Component {
   	}
 	if(this.state.searchCount<=15||data.name==="Luke Skywalker"){
 	this.setState({searching:true});
-		this.props.dispatch(getAllTasks(this.state.value))
+	debugger
+		this.props.getAllTasks(this.state.value)
 		// axios.get(`https://swapi.co/api/planets/?search=${this.state.value}`)
 		//   .then((response)=>{
 		// 	tdispatch(his.setState({data:response.d)ata,searching:false});
@@ -167,7 +171,12 @@ class Search extends React.Component {
     );
   }
 }
-const mapDispatch = {getAllTasks};
-export default connect()(Search);
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+  getAllTasks:getAllTasks()
+}, dispatch)};
+//const mapDispatchToProps = {getAllTasks:getAllTasks()}
+export default connect(null,mapDispatchToProps)(Search);
 
 

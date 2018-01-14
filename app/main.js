@@ -6,11 +6,11 @@ import store from './store/store';
 import {Provider} from 'react-redux';
 const render = (Component) => {
   ReactDOM.render(
-    <AppContainer>
+    
     <Provider store={store}>
       <Component />
     </Provider>  
-    </AppContainer>,
+    ,
     document.getElementById('root'),
   );
 };
