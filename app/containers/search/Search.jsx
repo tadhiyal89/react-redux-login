@@ -15,9 +15,7 @@ import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import { bindActionCreators } from 'redux';
-
-
-import { getAllTasks }  from '../../actions/action'
+import { getAllTasks,getAllSearch }  from '../../actions/action'
 class Search extends React.Component {
   constructor(props){
 	super(props);
@@ -174,7 +172,7 @@ class Search extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-  getAllTasks:getAllTasks()
+  getAllTasks,getAllSearch
 }, dispatch)};
 //const mapDispatchToProps = {getAllTasks:getAllTasks()}
 export default connect(null,mapDispatchToProps)(Search);
