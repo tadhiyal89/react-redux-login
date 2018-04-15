@@ -15,7 +15,7 @@ import { withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import { bindActionCreators } from 'redux';
-import { getAllTasks,getAllSearch }  from '../../actions/action'
+import { getAllTasks,getAllSearch,fetchAllData }  from '../../actions/action'
 class Search extends React.Component {
   constructor(props){
 	super(props);
@@ -67,9 +67,8 @@ class Search extends React.Component {
   		this.setState({searchTime:new Date()})
   	}
 	if(this.state.searchCount<=15||data.name==="Luke Skywalker"){
-	this.setState({searching:true});
-	debugger
-		this.props.getAllTasks(this.state.value)
+		this.setState({searching:true});
+		this.props.fetchAllData(this.state.value)
 		// axios.get(`https://swapi.co/api/planets/?search=${this.state.value}`)
 		//   .then((response)=>{
 		// 	tdispatch(his.setState({data:response.d)ata,searching:false});
@@ -82,12 +81,12 @@ class Search extends React.Component {
 	}
   }
   planetInfo(){
-  	let tempArr = []
-  	this.state.data.count>0 && this.state.data.results.map((info,i)=>{
+		let tempArr = []
+  	this.props.results && this.props.results.count>0 && this.props.results.results.map((info,i)=>{
   		tempArr.push(info.population)
   	})
   	tempArr.sort(function(a, b){return b-a});
-  	let html = this.state.data.count>0 && this.state.data.results.map((info,i)=>{
+  	let html = this.props.results && this.props.results.count>0 && this.props.results.results.map((info,i)=>{
   		let splitArr = info.url.split('/')
   		return(
   			<div key={i} className="panel panel-default" >
@@ -172,9 +171,13 @@ class Search extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-  getAllTasks,getAllSearch
+  getAllTasks,fetchAllData
 }, dispatch)};
-//const mapDispatchToProps = {getAllTasks:getAllTasks()}
-export default connect(null,mapDispatchToProps)(Search);
+const mapStateToProps = (state)=>{
+ return {
+	 results:state.searchResults
+ }
+}//{getAllTasks:getAllTasks()}
+export default connect(mapStateToProps,mapDispatchToProps)(Search);
 
 
